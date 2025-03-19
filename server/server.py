@@ -1,11 +1,13 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import util
 
 app = Flask(__name__)
+CORS(app)
 
 util.load_saved_artifacts()
 
-@app.route("/get_location_names")
+@app.route("/get_location_names", methods=['GET'])
 def get_location_names():
     response = jsonify({
         'location':util.get_location_names()
